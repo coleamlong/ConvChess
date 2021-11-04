@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter
 import chess
 
-WIDTH, HEIGHT = 800, 800
+WIDTH, HEIGHT = 1000, 800
 BOARD_COLORS = ["#444444", "#aaaaaa"]
 SQUARE_SIZE = 100
 
@@ -14,7 +14,7 @@ class Root(Tk):
         self.middleframe = tkinter.Frame(self)
         self.middleframe.grid(row=8, column=8)
         self.wm_iconbitmap('window_icon.ico')
-        self.minsize(WIDTH, HEIGHT)
+        self.resizable(False, False)
 
         self.canvas = tkinter.Canvas(self, bg="white", width=WIDTH, height=HEIGHT)
         self.canvas.grid(row=0, column=1, columnspan=8, rowspan=8)
@@ -30,6 +30,8 @@ class Root(Tk):
             for row in range(self.boardSize):
 
                 self.board[row][col] = SquareButton(self.canvas, row, col, SQUARE_SIZE, next(color))
+    
+    def 
 
 class SquareButton:
     def __init__(self, canvas: tkinter.Canvas, row: int, column: int, size: int, color: str) -> None:
