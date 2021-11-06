@@ -1,7 +1,16 @@
 import numpy as np
 
 
-# binary step function
+# binary step
+def bin_step(x):
+    return 0 if x < 0 else 1
+
+
+def bin_step_prime(x):
+    raise NotImplementedError
+
+
+# ReLU
 def bin_step(x):
     raise NotImplementedError
 
@@ -10,7 +19,7 @@ def bin_step_prime(x):
     raise NotImplementedError
 
 
-# binary step function
+# Linear
 def bin_step(x):
     raise NotImplementedError
 
@@ -19,7 +28,7 @@ def bin_step_prime(x):
     raise NotImplementedError
 
 
-# binary step function
+# Tanh
 def bin_step(x):
     raise NotImplementedError
 
@@ -28,7 +37,7 @@ def bin_step_prime(x):
     raise NotImplementedError
 
 
-# binary step function
+# Softmax
 def bin_step(x):
     raise NotImplementedError
 
@@ -37,16 +46,7 @@ def bin_step_prime(x):
     raise NotImplementedError
 
 
-# binary step function
-def bin_step(x):
-    raise NotImplementedError
-
-
-def bin_step_prime(x):
-    raise NotImplementedError
-
-
-# binary step function
+# Sigmoid
 def bin_step(x):
     raise NotImplementedError
 

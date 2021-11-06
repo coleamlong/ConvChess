@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter
 import chess
 
-WIDTH, HEIGHT = 800, 800
+WIDTH, HEIGHT = 1000, 800
 BOARD_COLORS = ["#444444", "#aaaaaa"]
 SQUARE_SIZE = 100
 
@@ -15,7 +15,7 @@ class Root(Tk):
         self.middleframe = tkinter.Frame(self)
         self.middleframe.grid(row=8, column=8)
         self.wm_iconbitmap('window_icon.ico')
-        self.minsize(WIDTH, HEIGHT)
+        self.resizable(False, False)
 
         self.canvas = tkinter.Canvas(
             self, bg="white", width=WIDTH, height=HEIGHT)
