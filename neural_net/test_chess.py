@@ -48,6 +48,8 @@ for line in data_lines:
     y_data.append(line_array[0])
     x_data.append(to_matrix(line_array[1]))
 
+print(x_data[0])
+
 x_train = x_data[0:len(x_data) - 11]
 y_train = y_data[0:len(y_data) - 11]
 x_test = x_data[len(x_data) - 10:len(x_data) - 1]
