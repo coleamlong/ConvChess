@@ -1,3 +1,5 @@
+import numpy as np
+
 class Network:
     def __init__(self) -> None:
         self.layers = []
@@ -25,6 +27,7 @@ class Network:
             output = input_data[i]
             for layer in self.layers:
                 output = layer.forward(output)
+                print(output)
             result.append(output)
 
         return result
@@ -39,9 +42,9 @@ class Network:
             err = 0
             for j in range(samples):
                 # forward propagation
-                output = x_train[j]
+                output = np.array(x_train[j])
                 for layer in self.layers:
-                    output = layer.forward(output)
+                    output = layer.forward(output.reshape(layer.input_shape))
 
                 # compute loss (for display purpose only)
                 err += self.loss(y_train[j], output)

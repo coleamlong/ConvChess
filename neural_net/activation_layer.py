@@ -1,10 +1,10 @@
-from layer import Layer
+from neural_net.layer import Layer
 
 
 # inherit from base class Layer
 class ActivationLayer(Layer):
     def __init__(self, activation, activation_prime) -> None:
-        super().__init__()
+        super().__init__(None)
         self.activation = activation
         self.activation_prime = activation_prime
 

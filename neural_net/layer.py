@@ -1,5 +1,6 @@
 class Layer:
-    def __init__(self) -> None:
+    def __init__(self, input_shape) -> None:
+        self.input_shape = input_shape
         self.input = None
         self.output = None
 

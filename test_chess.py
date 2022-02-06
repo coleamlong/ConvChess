@@ -1,10 +1,12 @@
 import numpy as np
 
-from network import Network
-from fc_layer import FCLayer
-from activation_layer import ActivationLayer
-from activation_functions import tanh, tanh_prime, linear, linear_prime
-from loss_functions import mse, mse_prime
+from neural_net.network import Network
+from neural_net.fc_layer import FCLayer
+from neural_net.convolutional_layer import ConvLayer
+from neural_net.max_pooling_layer import MaxPoolLayer
+from neural_net.activation_layer import ActivationLayer
+from neural_net.activation_functions import tanh, tanh_prime, linear, linear_prime
+from neural_net.loss_functions import mse, mse_prime
 
 import chess
 
@@ -40,15 +42,14 @@ def to_matrix(fen: str):
     return board_matrix
 
 
-x_data = []
-y_data = []
-data_lines = open("data.txt").read().splitlines()
-for line in data_lines:
-    line_array = line.split(" ", 1)
-    y_data.append(line_array[0])
-    x_data.append(to_matrix(line_array[1]))
+with open("fens.csv") as fens_csv:
+    x_data_raw = np.loadtxt(fens_csv, dtype=str, delimiter=",")
+x_data = list(map(to_matrix, x_data_raw))
 
-print(x_data[0])
+with open("evals.csv") as evals_csv:
+    y_data = np.loadtxt(evals_csv, delimiter=",")
+
+print(x_data[0], y_data[0])
 
 x_train = x_data[0:len(x_data) - 11]
 y_train = y_data[0:len(y_data) - 11]
@@ -57,11 +58,11 @@ y_test = y_data[len(y_data) - 10:len(y_data) - 1]
 
 # network
 net = Network()
-net.add(FCLayer(64, 10))
+net.add(ConvLayer((8, 8, 12), (1, 1, 12)))
+net.add(MaxPoolLayer((8, 8), 2, 2))
+net.add(FCLayer(16, 8))
 net.add(ActivationLayer(tanh, tanh_prime))
-net.add(FCLayer(10, 10))
-net.add(ActivationLayer(tanh, tanh_prime))
-net.add(FCLayer(10, 1))
+net.add(FCLayer(8, 1))
 net.add(ActivationLayer(linear, linear_prime))
 
 # train
