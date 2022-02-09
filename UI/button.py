@@ -1,12 +1,12 @@
 import pygame as pg
 
-
 BUTTON_COLOR = (230, 230, 230)
 HIGHLIGHT_COLOR = (255, 255, 255)
 OUTLINE_COLOR = (200, 200, 200)
 OUTLINE_PADDING = .05
 TEXT_SCALE = 0.7
 TEXT_COLOR = (32, 32, 32)
+
 
 class Button:
     def __init__(self, id: str, x, y, width, height, text=""):

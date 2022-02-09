@@ -15,7 +15,6 @@ class FCLayer(Layer):
     def forward(self, input_data):
         self.input = input_data
         self.output = np.dot(self.input, self.weights) + self.bias
-        print(self.output)
         return self.output
 
     # computes dE/dW, dE/dB for a given output_error=dE/dY. Returns input_error=dE/dX.

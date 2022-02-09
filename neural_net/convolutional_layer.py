@@ -26,11 +26,12 @@ class ConvLayer(Layer):
 
     # computes dE/dW, dE/dB for a given output_error=dE/dY. Returns input_error=dE/dX.
     def backward(self, output_error, learning_rate):
-        input_error = np.dot(output_error, self.weights.T)
-        weights_error = np.dot(self.input.T, output_error)
-        bias_error = np.dot(self.input.T, output_error)
+        input_error = np.dot(output_error, np.average(self.weights.T))
 
-        # update parameters
-        self.weights -= learning_rate * weights_error
-        self.bias -= learning_rate * bias_error
+        avg = np.average(output_error)
+        self.weights -= learning_rate * avg
+        for j in range(self.out_dim[1]):
+            for i in range(self.out_dim[0]):
+                self.bias[i][j] -= learning_rate * output_error[i][j]
+
         return input_error

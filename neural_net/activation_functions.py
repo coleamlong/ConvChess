@@ -1,8 +1,17 @@
+"""
+Activation functions and their derivatives
+"""
+
 import numpy as np
 
+__author__ = "Cole Amlong"
+__credits__ = ["Omar Aflak"]
 
-# binary step
+
 def bin_step(x):
+    """
+    :return: 0 for x < 0. 1 for x >= 1
+    """
     return 0 if x < 0 else 1
 
 
@@ -10,8 +19,11 @@ def bin_step_prime(x):
     raise NotImplementedError
 
 
-# ReLU
+# Rectified Linear
 def relu(x):
+    """
+    :return: 0 for x < 0, x for x >= 0
+    """
     return max(0, x)
 
 
@@ -21,6 +33,9 @@ def relu_prime(x):
 
 # Linear
 def linear(x):
+    """
+    :return: x
+    """
     return x
 
 

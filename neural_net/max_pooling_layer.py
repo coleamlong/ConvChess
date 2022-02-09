@@ -34,4 +34,10 @@ class MaxPoolLayer(Layer):
 
     # computes dE/dW, dE/dB for a given output_error=dE/dY. Returns input_error=dE/dX.
     def backward(self, output_error, learning_rate):
-        return output_error
+        scalar = self.kernel_size ** 2
+        result = np.zeros(len(*output_error) * scalar)
+
+        for i, value in enumerate(output_error[0]):
+            for j in range(scalar):
+                result[i * scalar + j] = value
+        return result.reshape((8, 8))

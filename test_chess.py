@@ -1,14 +1,8 @@
 import numpy as np
-
-from neural_net.network import Network
-from neural_net.fc_layer import FCLayer
-from neural_net.convolutional_layer import ConvLayer
-from neural_net.max_pooling_layer import MaxPoolLayer
-from neural_net.activation_layer import ActivationLayer
-from neural_net.activation_functions import tanh, tanh_prime, linear, linear_prime
-from neural_net.loss_functions import mse, mse_prime
-
 import chess
+import tensorflow as tf
+from tensorflow.keras import datasets, layers, models
+import matplotlib.pyplot as plt
 
 chess_dict = {
     "p": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -49,26 +43,11 @@ x_data = list(map(to_matrix, x_data_raw))
 with open("evals.csv") as evals_csv:
     y_data = np.loadtxt(evals_csv, delimiter=",")
 
-print(x_data[0], y_data[0])
-
 x_train = x_data[0:len(x_data) - 11]
 y_train = y_data[0:len(y_data) - 11]
 x_test = x_data[len(x_data) - 10:len(x_data) - 1]
 y_test = y_data[len(y_data) - 10:len(y_data) - 1]
+print(chess.PIECE_TYPES)
 
-# network
-net = Network()
-net.add(ConvLayer((8, 8, 12), (1, 1, 12)))
-net.add(MaxPoolLayer((8, 8), 2, 2))
-net.add(FCLayer(16, 8))
-net.add(ActivationLayer(tanh, tanh_prime))
-net.add(FCLayer(8, 1))
-net.add(ActivationLayer(linear, linear_prime))
 
-# train
-net.use(mse, mse_prime)
-net.fit(x_train, y_train, epochs=30, learning_rate=0.1)
 
-output = net.predict(x_test)
-error = np.mean(output != y_test)
-print(f"Error = {error}%")
